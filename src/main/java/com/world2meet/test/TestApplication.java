@@ -2,7 +2,9 @@ package com.world2meet.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -17,8 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@SpringBootApplication
-@EnableWebSecurity
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @EnableSwagger2
 public class TestApplication {
 
@@ -28,21 +29,21 @@ public class TestApplication {
 
 	//Define all details for app info
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Digitalthinking Shool")
-				.description("Digitalthinking Shool API reference for developers, teh error handler is implement using \n"
+		return new ApiInfoBuilder().title("Super Hero Manage API")
+				.description("Super Hero Manage API reference for developers, teh error handler is implement using \n"
 						+ " The IETF devised RFC 7807 effor, which creates a generalized error-handling schema.\n"
 						+ "https://tools.ietf.org/html/rfc7807")
-				.termsOfServiceUrl("http://www.linkedin.com/in/casotobotero")
-				.contact(new Contact("Carlos Adrian Soto", "", "https://digitalthinking.biz/es/ada-enterprise-core#contactus"))
-				.license("sotobotero License")
-				.licenseUrl("https://digitalthinking.biz/es/ada-enterprise-core#contactus")
+				.termsOfServiceUrl("http://www.web.com/terms")
+				.contact(new Contact("Alberto Martin", "", "https://contact.com"))
+				.license("plexus License")
+				.licenseUrl("https://plexus.biz/es/ada-enterprise-core#contactus")
 				.version("1.0")
 				.build();
 	}
 
 	//main Swagger config definition
 	@Bean
-	public Docket petApi() {
+	public Docket SuperHeroApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("digitalthinking-spis")
 				.apiInfo(apiInfo())
@@ -53,15 +54,14 @@ public class TestApplication {
 				.apis(RequestHandlerSelectors.basePackage("com.world2meet"))
 				.paths(PathSelectors.any())
 				.build()
-				.tags(new Tag("Super Hero API", "All apis relating to billing service") {},
-						new Tag("Invoice", "Make invoices"));
+				.tags(new Tag("Super Hero API", "All apis relating to super hero service") {});
 	}
 
 	//define API key to include the header
 	private ApiKey apiKey() {
 		return new ApiKey("JWT", "Authorization", "header");
 	}
-	//condigure JWT security with global Autorization Scope
+	//configure JWT security with global Autorization Scope
 
 	private SecurityContext securityContext() {
 		return SecurityContext.builder().securityReferences(defaultAuth()).build();
@@ -73,4 +73,6 @@ public class TestApplication {
 		authorizationScopes[0] = authorizationScope;
 		return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
 	}
+
+
 }
