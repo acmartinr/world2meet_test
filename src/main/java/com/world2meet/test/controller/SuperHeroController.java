@@ -1,27 +1,77 @@
 package com.world2meet.test.controller;
 
-
+import com.world2meet.test.payload.request.SuperHeroRequest;
+import com.world2meet.test.payload.response.ErrorResponse;
+import com.world2meet.test.persistence.model.SuperHero;
+import com.world2meet.test.service.SuperHeroService;
+import com.world2meet.test.utils.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @Api(tags = "Super Hero API")
 @RestController
 @RequestMapping("/superhero")
 public class SuperHeroController {
 
-    @ApiOperation(value = "Return all super heroes budled into response",notes = "Return 204 if not data founded")
+    @Autowired
+    SuperHeroService superHeroService;
+
+    @ApiOperation(value = "Return all super heroes budled into response", notes = "Return 204 if not data founded")
     @ApiResponses(value = {
-            @ApiResponse(code = 204,message = "There are not super heroes"),
-            @ApiResponse(code = 500,message = "Internal error")
+            @ApiResponse(code = 204, message = "There are not super heroes"),
+            @ApiResponse(code = 500, message = "Internal error")
     })
     @GetMapping("/")
-    public String helloWorld(){
-        return "Hello World";
+    public List<SuperHero> getAllSuperHeroes() {
+        return superHeroService.getAllSuperHeroes();
+    }
+
+
+    @ApiOperation(value = "Return single super hero with id passed by param into response", notes = "Return 404 if not data founded")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "There are not super hero with data setted"),
+            @ApiResponse(code = 500, message = "Internal error")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getSuperHeroDetails(@RequestParam Long id) {
+        if (superHeroService.getSuperHeroById(id).isPresent()) {
+            return new ResponseEntity<>(superHeroService.getSuperHeroById(id).get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ErrorResponse(Constants.NOT_SUPER_HEROES_FOUND_CODE), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "update super hero", notes = "Return 404 if not data founded")
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateSuperHero(@RequestParam Long id, @RequestBody SuperHeroRequest superHeroRequest) {
+        if (superHeroService.getSuperHeroById(id).isPresent()) {
+            return new ResponseEntity<>(superHeroService.getSuperHeroById(id).get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ErrorResponse(Constants.NOT_SUPER_HEROES_FOUND_CODE), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ApiOperation(value = "Remove super hero with id passed by param into request", notes = "Return 404 if not data founded")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "There are not super hero with id in params"),
+            @ApiResponse(code = 500, message = "Internal error")
+    })
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSuperHeroById(@PathVariable("id") Long id) {
+        int queryStatus = superHeroService.deleteSuperHeroById(id);
+        if (queryStatus == Constants.OBJECT_FOUNDED_CODE) {
+            return new ResponseEntity<>(Constants.SUPER_HEROE_WAS_REMOVED_MSG, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ErrorResponse(Constants.NOT_SUPER_HEROES_FOUND_CODE), HttpStatus.NOT_FOUND);
+        }
     }
 }
