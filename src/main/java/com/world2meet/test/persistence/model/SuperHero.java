@@ -1,13 +1,10 @@
 package com.world2meet.test.persistence.model;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Table(name = "SUPER_HERO")
 public class SuperHero {
-
-
     //mark id as primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
