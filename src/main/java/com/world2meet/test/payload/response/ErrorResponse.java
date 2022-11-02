@@ -26,6 +26,10 @@ public class ErrorResponse {
                 return Constants.MISSING_PARAM_FIELDS;
             case Constants.INCORRECT_FORMAT_FIELDS_CODE:
                 return Constants.INCORRECT_FORMAT_FIELDS;
+            case Constants.UPDATE_ERROR_CODE:
+                return Constants.UPDATE_ERROR_CODE_MSG;
+            case Constants.NOT_FILTER_SUPER_HEROES_FOUND_CODE:
+                return Constants.NOT_FILTER_SUPER_HEROES_FOUND_MSG;
             default:
                 setErrorCode(Constants.UNKNOWN_ERRROR_CODE);
                 return Constants.UNKNOWN_ERRROR;
