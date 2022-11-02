@@ -7,7 +7,7 @@ import java.util.List;
 
 //Interface for use SQL sentences in java code
 public interface SuperHeroRepository extends JpaRepository<SuperHero, Long> {
-    //Load all prices with date between start and end date item and predctId ad brandId seted by param order by priority and return only 1 element
+    //Load all super heroes that contains name passed by param
     @Query(nativeQuery = true, value = "SELECT * FROM SUPER_HERO s where name ilike concat('%',?1,'%');")
     List<SuperHero> filterSuperHeroByName(String name);
 }
