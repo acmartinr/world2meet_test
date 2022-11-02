@@ -8,6 +8,8 @@ public class Constants {
     public final static int MISSING_PARAM_FIELDS_CODE = 103;
     public final static int INCORRECT_FORMAT_FIELDS_CODE = 104;
     public final static int UNKNOWN_ERRROR_CODE = 111;
+    public final static int UPDATE_ERROR_CODE = 113;
+    public final static int NOT_FILTER_SUPER_HEROES_FOUND_CODE = 114;
 
     //Error code Texts
     public static String NOT_SUPER_HEROES_FOUND_MSG = "Lo sentimos no encontramos nningun super heroe con dicho id";
@@ -17,5 +19,7 @@ public class Constants {
     public static String INCORRECT_FORMAT_FIELDS = "Los parametros contienen formatos incorrectos";
     public static String UNKNOWN_ERRROR = "Error desconocido";
     public static String SUPER_HEROE_WAS_REMOVED_MSG = "El super heroe fue eliminado correctamente del sistema";
+    public static String UPDATE_ERROR_CODE_MSG = "Error al actualizar los datos del super heroe";
+    public static String NOT_FILTER_SUPER_HEROES_FOUND_MSG = "Lo sentimos no encontramos ningun super heroe con los datos especificados";
     private Constants() {}
 }
