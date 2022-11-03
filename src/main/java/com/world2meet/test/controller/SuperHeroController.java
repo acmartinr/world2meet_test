@@ -62,7 +62,7 @@ public class SuperHeroController {
     @PostMapping("/")
     public ResponseEntity<Object> addSuperHero(@RequestBody SuperHeroRequest superHeroRequest) {
         SuperHero superHero = superHeroService.addSuperHero(srqm.superHeroRequestToSuperHero(superHeroRequest));
-        return new ResponseEntity<>(superHero, HttpStatus.OK);
+        return new ResponseEntity<>(superHero, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Return super hero list filtered by name", notes = "Return 404 if not data founded")
