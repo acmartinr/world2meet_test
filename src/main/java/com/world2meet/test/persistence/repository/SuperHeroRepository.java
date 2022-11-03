@@ -2,7 +2,6 @@ package com.world2meet.test.persistence.repository;
 import com.world2meet.test.persistence.model.SuperHero;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import java.time.LocalDateTime;
 import java.util.List;
 
 //Interface for use SQL sentences in java code
