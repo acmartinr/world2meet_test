@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionAdviceController {
 
-    //Validator for params fields
+    //Validator for params field
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Object> handleMissingParams(MissingServletRequestParameterException ex) {
         return new ResponseEntity<>(new ErrorResponse(Constants.MISSING_PARAM_FIELDS_CODE), HttpStatus.BAD_REQUEST);
