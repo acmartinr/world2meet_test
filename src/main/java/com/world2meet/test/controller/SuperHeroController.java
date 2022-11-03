@@ -1,5 +1,6 @@
 package com.world2meet.test.controller;
 
+import com.world2meet.test.advice.TrackExecutionTime;
 import com.world2meet.test.payload.request.SuperHeroRequest;
 import com.world2meet.test.payload.response.ErrorResponse;
 import com.world2meet.test.persistence.model.SuperHero;
@@ -27,6 +28,8 @@ public class SuperHeroController {
     @Autowired
     SuperHeroRequestMapper srqm;
 
+
+    @TrackExecutionTime
     @ApiOperation(value = "Return all super heroes budled into response", notes = "Return 204 if not data founded")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "There are not super heroes"),
@@ -50,6 +53,16 @@ public class SuperHeroController {
         } else {
             return new ResponseEntity<>(new ErrorResponse(Constants.NOT_SUPER_HEROES_FOUND_CODE), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @ApiOperation(value = "Add super hero with param to super hero table", notes = "Return 404 if not data founded")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = "Internal error")
+    })
+    @PostMapping("/")
+    public ResponseEntity<Object> addSuperHero(@RequestBody SuperHeroRequest superHeroRequest) {
+        SuperHero superHero = superHeroService.addSuperHero(srqm.superHeroRequestToSuperHero(superHeroRequest));
+        return new ResponseEntity<>(superHero, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Return super hero list filtered by name", notes = "Return 404 if not data founded")
