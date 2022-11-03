@@ -3,6 +3,7 @@ package com.world2meet.test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +21,7 @@ import java.util.List;
 
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@EnableCaching
 @EnableSwagger2
 public class TestApplication {
 
