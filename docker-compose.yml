@@ -1,0 +1,14 @@
+#see for java tunning https://docs.oracle.com/cd/E15523_01/web.1111/e13814/jvm_tuning.htm#PERFM161
+version: '3.8'
+services:
+  #Docker Compose creates a virtual network between the services and the DNS name
+  #used for each service is its name: that’s why it’s possible to use eureka-discovery as the hostname.
+  registry-discovery:
+    container_name: super-hero
+    image: springio/gs-spring-boot-docker
+    ports:
+      - 8080:8080
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
