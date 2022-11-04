@@ -73,6 +73,7 @@ public class SuperHeroController {
     @GetMapping("/filter")
     public ResponseEntity<Object> getSuperHeroByName(@RequestParam String name) {
         List<SuperHero> superHeroesList = superHeroService.findSuperHeroesByName(name);
+        //Check if any super hero was foudned
         if (!superHeroesList.isEmpty()) {
             return new ResponseEntity<>(superHeroesList, HttpStatus.OK);
         } else {
@@ -107,6 +108,7 @@ public class SuperHeroController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSuperHeroById(@PathVariable("id") Long id) {
         int queryStatus = superHeroService.deleteSuperHeroById(id);
+        //Check if super hero was deleted
         if (queryStatus == Constants.OBJECT_FOUNDED_CODE) {
             return new ResponseEntity<>(Constants.SUPER_HEROE_WAS_REMOVED_MSG, HttpStatus.OK);
         } else {
