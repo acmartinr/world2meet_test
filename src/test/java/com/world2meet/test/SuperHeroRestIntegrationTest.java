@@ -18,7 +18,7 @@ public class SuperHeroRestIntegrationTest {
     private WebTestClient webTestClient;
 
     @Test
-    void testCreateSuperHero(){
+    void should_create_super_hero_and_return_super_hero_object_cerated(){
         //Create object to add in post request
         SuperHeroRequest superHeroRequest = new SuperHeroRequest();
         superHeroRequest.setGender("male");
