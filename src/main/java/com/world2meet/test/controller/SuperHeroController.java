@@ -47,7 +47,7 @@ public class SuperHeroController {
             @ApiResponse(code = 500, message = "Internal error")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getSuperHeroDetails(@RequestParam Long id) {
+    public ResponseEntity<Object> getSuperHeroDetails(@PathVariable Long id) {
         if (superHeroService.getSuperHeroById(id).isPresent()) {
             return new ResponseEntity<>(superHeroService.getSuperHeroById(id).get(), HttpStatus.OK);
         } else {
@@ -92,11 +92,7 @@ public class SuperHeroController {
         if (superHeroService.getSuperHeroById(id).isPresent()) {
             Optional<SuperHero> superHero = superHeroService.updateSuperHeroById(id, srqm.superHeroRequestToSuperHero(superHeroRequest));
             //Check if update was success
-            if (superHero.isPresent()) {
-                return new ResponseEntity<>(superHero.get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(new ErrorResponse(Constants.UPDATE_ERROR_CODE), HttpStatus.BAD_REQUEST);
-            }
+            return superHero.<ResponseEntity<Object>>map(hero -> new ResponseEntity<>(hero, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(new ErrorResponse(Constants.UPDATE_ERROR_CODE), HttpStatus.BAD_REQUEST));
         } else {
             return new ResponseEntity<>(new ErrorResponse(Constants.NOT_SUPER_HEROES_FOUND_CODE), HttpStatus.NOT_FOUND);
         }

@@ -31,7 +31,7 @@ public class TestApplication {
 				.description("Super Hero Manage API reference for developers, teh error handler is implement using \n"
 						+ " The IETF devised RFC 7807 effor, which creates a generalized error-handling schema.\n"
 						+ "https://tools.ietf.org/html/rfc7807")
-				.termsOfServiceUrl("http://www.web.com/terms")
+				.termsOfServiceUrl("https://www.web.com/terms")
 				.contact(new Contact("Alberto Martin", "", "https://contact.com"))
 				.license("plexus License")
 				.licenseUrl("https://plexus.biz/es/ada-enterprise-core#contactus")

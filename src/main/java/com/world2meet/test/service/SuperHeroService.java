@@ -1,7 +1,4 @@
 package com.world2meet.test.service;
-
-import com.world2meet.test.advice.TrackExecutionTime;
-import com.world2meet.test.payload.request.SuperHeroRequest;
 import com.world2meet.test.persistence.model.SuperHero;
 import com.world2meet.test.persistence.repository.SuperHeroRepository;
 import com.world2meet.test.utils.Constants;
@@ -43,8 +40,7 @@ public class SuperHeroService {
     public Optional<SuperHero> updateSuperHeroById(Long id, SuperHero superHeroModel) {
         superHeroModel.setId(id);
         SuperHero superHero = superHeroRepository.save(superHeroModel);
-        Optional<SuperHero> userOptional = Optional.of(superHero);
-        return userOptional;
+        return Optional.of(superHero);
     }
 
     //getting all super heroes records

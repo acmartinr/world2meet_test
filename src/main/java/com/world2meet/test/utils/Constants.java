@@ -12,7 +12,7 @@ public class Constants {
     public final static int NOT_FILTER_SUPER_HEROES_FOUND_CODE = 114;
 
     //Error code Texts
-    public static String NOT_SUPER_HEROES_FOUND_MSG = "Lo sentimos no encontramos nningun super heroe con dicho id";
+    public static String NOT_SUPER_HEROES_FOUND_MSG = "Lo sentimos no encontramos ningun super heroe con dicho id";
     public static String INCORRECT_DATE_FORMAT = "Valor incorrecto para startDate ,el valor de la fecha debe tener un formato correcto como 'uuuu-MM-dd HH:mm:ss' y tener valores validos para una fecha";
     public static String ERROR_GETTING_PRICES = "Hubo un Error al Obtener la lista de precios";
     public static String MISSING_PARAM_FIELDS = "Todos los parametros de entrada no han sido introducidos";
